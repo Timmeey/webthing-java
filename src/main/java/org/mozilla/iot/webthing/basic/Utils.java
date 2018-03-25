@@ -2,7 +2,7 @@
  * Utility functions.
  */
 
-package org.mozilla.iot.webthing;
+package org.mozilla.iot.webthing.basic;
 
 import java.net.Inet4Address;
 import java.net.UnknownHostException;

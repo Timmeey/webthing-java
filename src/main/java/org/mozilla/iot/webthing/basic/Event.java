@@ -2,7 +2,7 @@
  * High-level Event base class implementation.
  */
 
-package org.mozilla.iot.webthing;
+package org.mozilla.iot.webthing.basic;
 
 import org.json.JSONException;
 import org.json.JSONObject;

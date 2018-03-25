@@ -36,11 +36,11 @@ dependencies {
 package org.mozilla.iot.webthing.test;
 
 import org.json.JSONObject;
-import org.mozilla.iot.webthing.Action;
-import org.mozilla.iot.webthing.Event;
-import org.mozilla.iot.webthing.Property;
-import org.mozilla.iot.webthing.Thing;
-import org.mozilla.iot.webthing.WebThingServer;
+import org.mozilla.iot.webthing.basic.Action;
+import org.mozilla.iot.webthing.basic.Event;
+import org.mozilla.iot.webthing.basic.Property;
+import org.mozilla.iot.webthing.basic.Thing;
+import org.mozilla.iot.webthing.basic.WebThingServer;
 
 import java.io.IOException;
 import java.util.ArrayList;

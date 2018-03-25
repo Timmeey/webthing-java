@@ -2,7 +2,7 @@
  * Java Web Thing server implementation.
  */
 
-package org.mozilla.iot.webthing;
+package org.mozilla.iot.webthing.basic;
 
 import org.json.JSONArray;
 import org.json.JSONException;
