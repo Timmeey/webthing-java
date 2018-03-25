@@ -1,21 +1,19 @@
 package org.mozilla.iot.webthing.example;
 
-import org.json.JSONObject;
-import org.mozilla.iot.webthing.basic.Action;
-import org.mozilla.iot.webthing.basic.Event;
-import org.mozilla.iot.webthing.basic.Property;
-import org.mozilla.iot.webthing.basic.Thing;
-import org.mozilla.iot.webthing.basic.WebThingServer;
-
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
+import org.json.JSONObject;
+import org.mozilla.iot.webthing.DimmableColorLight;
+import org.mozilla.iot.webthing.basic.Action;
+import org.mozilla.iot.webthing.basic.Event;
+import org.mozilla.iot.webthing.basic.Thing;
+import org.mozilla.iot.webthing.basic.SettableValue;
+import org.mozilla.iot.webthing.basic.WebThingServer;
 
 public class TestServer {
-    public static Thing makeThing() {
+   /* public static Thing makeThing() {
         Thing thing = new Thing("My Lamp", "thing", "A web connected lamp");
 
         Map<String, Object> onDescription = new HashMap<>();
@@ -56,15 +54,26 @@ public class TestServer {
         thing.addAvailableEvent("overheated", overheatedMetadata);
 
         return thing;
+    }*/
+
+    public static DimmableColorLight smartThing(){
+        LedStrip light = new LedStrip();
+
+        return new DimmableColorLight(
+            new SettableValue<>((c)-> light.setColor(c),() -> light.color),
+            new SettableValue<>((b)-> light.setBrightness(b),() -> light.brightness),
+            new SettableValue<>((o)-> light.setOn(o),() -> light.on),
+            "LogLight"
+            );
     }
 
     public static void main(String[] args) {
-        Thing thing = makeThing();
+        //Thing thing = makeThing();
         WebThingServer server;
 
         try {
             List<Thing> things = new ArrayList<>();
-            things.add(thing);
+            things.add(smartThing().thing());
 
             // If adding more than one thing here, be sure to set the second
             // parameter to some string, which will be broadcast via mDNS.
@@ -107,5 +116,28 @@ public class TestServer {
             thing.setProperty("level", input.getInt("level"));
             thing.addEvent(new OverheatedEvent(thing, 102));
         }
+    }
+
+    private static class LedStrip{
+        public void setColor(final String color) {
+            this.color = color;
+            System.out.println("Color is now: "+color);
+        }
+
+        public void setBrightness(final double brightness) {
+            this.brightness = brightness;
+            System.out.println("Brightness is now: "+brightness);
+
+        }
+
+        public void setOn(final boolean on) {
+            this.on = on;
+            System.out.println("On state is now: "+on);
+
+        }
+
+        String color;
+        double brightness;
+        boolean on;
     }
 }
